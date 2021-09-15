@@ -1,11 +1,25 @@
+import logging
 
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters
-import signal
-import os
-import sys
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+
+from DARKAMAN.config import (
+    BOT_USERNAME,
+    DARKAMAN,
+    OWNER,
+    PROJECT_NAME,
+    SOURCE_CODE,
+    SUPPORT_GROUP,
+    UPDATES_CHANNEL,
+)
+from DARKAMAN.helpers.decorators import authorized_users_only
+from DARKAMAN.modules.msg import Messages as tr
+
+logging.basicConfig(level=logging.INFO)
 
 
+@Client.on_message(filters.command("start") & filters.private & ~filters.edited)
+async def start_(client: Client, message: Message):
 HOME_TEXT = "<b>ʜᴇʏ, [{}](tg://user?id={})\n\n• ɪ'ᴍ ɖǟʀӄ ʍʊֆɨƈ ɪ ᴄᴀɴ ᴘʟᴀʏ ᴍᴜsɪᴄ ɪɴ ʏᴏᴜʀ ᴏᴘ ɢʀᴏᴜᴘ ᴅᴇᴠᴇʟᴏᴩᴇᴅ ʙʏ @DARKAMAN\n• ɪ ᴄᴀɴ ᴍᴀɴᴀɢᴇ ᴠᴄ's\n\n• ʜɪᴛ /help ᴛᴏ ᴋɴᴏᴡ ᴀʙᴏᴜᴛ ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs.</b>"
 HELP = """
 🎧 <b>I Can Play Musics On VoiceChats 🤪</b>
